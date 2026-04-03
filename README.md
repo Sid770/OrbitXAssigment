@@ -2,7 +2,6 @@
 
 A production-grade AI document processing system that automatically classifies, extracts structured data, and summarizes documents using Google Gemini LLM.
 
-**Status**: ✅ Complete and Production-Ready
 
 ---
 
