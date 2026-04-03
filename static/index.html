@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Document Processor</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📄 AI Document Processor</h1>
+            <p class="subtitle">Upload, process, and extract data from your documents</p>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h3>Drop files here or click to upload</h3>
+                <p>Supported formats: PDF, TXT</p>
+                <input
+                    type="file"
+                    id="fileInput"
+                    multiple
+                    accept=".pdf,.txt"
+                    style="display: none;"
+                >
+            </div>
+
+            <!-- File List -->
+            <div id="fileList" class="file-list"></div>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button id="processBtn" class="btn btn-primary" disabled>
+                    Process Files
+                </button>
+                <button id="clearBtn" class="btn btn-secondary">
+                    Clear All
+                </button>
+            </div>
+        </section>
+
+        <!-- Status Section -->
+        <section id="statusSection" class="status-section" style="display: none;">
+            <div class="status-header">
+                <h2>Processing Status</h2>
+                <div class="status-stats">
+                    <span class="stat">
+                        <span class="stat-label">Total:</span>
+                        <span id="totalCount" class="stat-value">0</span>
+                    </span>
+                    <span class="stat">
+                        <span class="stat-label">Completed:</span>
+                        <span id="completedCount" class="stat-value">0</span>
+                    </span>
+                    <span class="stat">
+                        <span class="stat-label">Failed:</span>
+                        <span id="failedCount" class="stat-value">0</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Progress Bars -->
+            <div id="progressList" class="progress-list"></div>
+
+            <!-- Processing Summary -->
+            <div id="processingMessage" class="processing-message">
+                Processing your documents...
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="results-section" style="display: none;">
+            <div class="results-header">
+                <h2>Results</h2>
+                <span id="resultsSummary" class="summary-text"></span>
+            </div>
+
+            <!-- Results Table -->
+            <div class="table-wrapper">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Document Type</th>
+                            <th>Confidence</th>
+                            <th>Fields Extracted</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- New Upload Button -->
+            <div class="button-group">
+                <button id="newUploadBtn" class="btn btn-primary">
+                    Upload More Files
+                </button>
+            </div>
+        </section>
+
+        <!-- Error Section -->
+        <section id="errorSection" class="error-section" style="display: none;">
+            <div class="error-header">
+                <h3>⚠️ Processing Errors</h3>
+            </div>
+            <div id="errorList" class="error-list"></div>
+        </section>
+
+        <!-- Details Modal -->
+        <div id="detailsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h2 id="detailsTitle"></h2>
+
+                <div class="details-grid">
+                    <div class="detail-section">
+                        <h4>Document Type</h4>
+                        <p id="detailDocType"></p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Confidence</h4>
+                        <p id="detailConfidence"></p>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Summary</h4>
+                    <p id="detailSummary"></p>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Extracted Fields</h4>
+                    <pre id="detailFields"></pre>
+                </div>
+
+                <div id="detailErrors" class="detail-section" style="display: none;">
+                    <h4>Errors</h4>
+                    <ul id="detailErrorList"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
